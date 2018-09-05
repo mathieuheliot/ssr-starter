@@ -4,19 +4,19 @@ Proof of concept and boilerplate of Server Side Rendering of ReactJS application
 
 ## Installation
 1. `npm install`
-2. TODO composer
 
 ## Usage
 
 ### Javascript side
 Execute `npm run [TASK]`, where TASK can be one of the following values:
-- `build`: Compile a application version ready to deploy in the /dist folder
+- `build`: Compile an application version ready to deploy in the /dist folder
 - `dev`: Launch an hot reload process
 - `start`: Launch a JS rendering server at http://localhost:3000
 - `test`: Serve JS content for browser rendering at http://localhost:8080
 
 ### PHP side
-`php ./php/index.php`
+You can test it by executing from /src/php folder:
+`php index.php`
 
 ## Sources
 ### ReactJS and Express:
