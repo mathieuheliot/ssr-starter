@@ -3,20 +3,20 @@
 Proof of concept and boilerplate of Server Side Rendering of ReactJS application inside templates files from PHP.
 
 ## Installation
-1. `npm install`
+1. `npm install`    
 
 ## Usage
-
-### Javascript side
+### NPM
+Development commands.
 Execute `npm run [TASK]`, where TASK can be one of the following values:
 - `build`: Compile an application version ready to deploy in the /dist folder
 - `dev`: Launch an hot reload process
 - `start`: Launch a JS rendering server at http://localhost:3000
 - `test`: Serve JS content for browser rendering at http://localhost:8080
 
-### PHP side
-You can test it by executing from /src/php folder:
-`php index.php`
+### Docker
+Production running process
+- `docker-compose up -d`: Launch PHP and NodeJS container with full SSR rendering
 
 ## Sources
 ### ReactJS and Express:
