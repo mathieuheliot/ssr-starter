@@ -4,6 +4,7 @@ Proof of concept and boilerplate of Server Side Rendering of ReactJS application
 
 ## Installation
 1. `npm install`    
+2. Create config.php file at src/php/config/ by using config.php.template file
 
 ## Usage
 ### NPM
