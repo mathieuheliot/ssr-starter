@@ -33,3 +33,7 @@ Production running process
 - https://github.com/gorangajic/isbot
 - https://geekflare.com/nginx-static-files-node-js/
 - https://medium.com/@utkarsh_verma/configure-nginx-as-a-web-server-and-reverse-proxy-for-nodejs-application-on-aws-ubuntu-16-04-server-872922e21d38
+
+### Docker configuration:
+- https://github.com/mattrayner/docker-lamp
+- https://github.com/naga3/docker-lamp

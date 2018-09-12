@@ -2,7 +2,7 @@ version: '2'
 services:
 
   php:
-    image: php:7.2.9-apache
+    build: ./src/php
     ports:
       - '80:80'
       - '443:443'
@@ -10,12 +10,10 @@ services:
       - ./src/php/:/var/www/html/
 
   node:
-    image: node:8
+    build: ./src/js
     working_dir: /opt/app/
     volumes:
       - .:/opt/app/
-    expose:
-      - '3000'
     ports:
-      - '3000:3000'
+      - '3000:3000'    
     command: 'npm run start'
