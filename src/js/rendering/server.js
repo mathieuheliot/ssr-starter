@@ -3,14 +3,14 @@ import path from 'path';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Layout from './../components/Layout';
+import Catalog from './../components/Catalog';
 
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', (req, res) => {
-    const jsx = (<Layout />);
+    const jsx = (<Catalog />);
     const reactDom = renderToString(jsx);
     res.writeHead(200, { "Content-type": "text/html" });
     res.end(htmlTemplate(reactDom));

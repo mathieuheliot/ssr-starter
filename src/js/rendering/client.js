@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import Layout from "./../components/Layout";
+import Catalog from "./../components/Catalog";
 
 const app = document.getElementById( "app" );
-ReactDOM.hydrate( <Layout />, app );
+ReactDOM.hydrate( <Catalog />, app );

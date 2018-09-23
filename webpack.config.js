@@ -33,6 +33,9 @@ if (ACTION === 'test') {
         devServer: {
             contentBase: path.join(__dirname, 'test'),
             compress: true,
+            historyApiFallback: {
+                index: 'index.html' // Tell webpack dev server to serve index.html for any route
+            },
             port: 8080
         }
     });
