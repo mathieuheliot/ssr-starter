@@ -1,7 +1,8 @@
 import React from 'react';
-import http from 'axios';
+import API from '../catalog/api';
 
 import Product from '../product/Product';
+;
 
 export default class Category extends React.Component {
 
@@ -14,7 +15,7 @@ export default class Category extends React.Component {
     }
 
     componentDidMount() {
-        http.get('/products.json')
+        API.getProducts()
             .then(json => this.setState({ products: json.data }))
             .catch(error => alert(error));
     }
