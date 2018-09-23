@@ -13,7 +13,7 @@ Execute `npm run [TASK]`, where TASK can be one of the following values:
 - `build`: Compile an application version ready to deploy in the /dist folder
 - `dev`: Launch an hot reload process
 - `start`: Launch a JS rendering server at http://localhost:3000
-- `test`: Serve JS content for browser rendering at http://localhost:8080
+- `test`: Serve JS content for browser rendering at http://localhost:3001
 
 ### Docker
 Production running process

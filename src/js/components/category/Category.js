@@ -15,14 +15,13 @@ export default class Category extends React.Component {
     }
 
     componentDidMount() {
-        API.getProducts()
-            .then(json => this.setState({ products: json.data }))
-            .catch(error => alert(error));
+        API.getProducts(this.state.id)
+            .then(products => this.setState({ products: products }));
     }
 
     render() {
         return (
-            <div>
+            <div className="category">
 
                 <h2>Category {this.state.id}</h2>
 

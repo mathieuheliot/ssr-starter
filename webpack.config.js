@@ -36,7 +36,7 @@ if (ACTION === 'test') {
             historyApiFallback: {
                 index: 'index.html' // Tell webpack dev server to serve index.html for any route
             },
-            port: 8080
+            port: 3001
         }
     });
 }

@@ -12,14 +12,14 @@ export default class Catalog extends React.Component {
     constructor() {
         super();
         this.state = {
-            title: "Catalogue"
+            title: "Catalogue Prestashop"
         }
     }
 
     render() {
         return (
             <Router>
-                <div>
+                <div className="catalog">
 
                     <h1>{this.state.title}</h1>
                     <nav>
