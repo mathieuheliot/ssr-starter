@@ -1,7 +1,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import Catalog from "./../components/Catalog";
+import Catalog from "../components/catalog/Catalog";
 
 const app = document.getElementById( "app" );
 ReactDOM.hydrate( <Catalog />, app );

@@ -5,7 +5,7 @@ import {
     Link
 } from 'react-router-dom';
 
-import Category from './Category';
+import Category from '../category/Category';
 
 export default class Catalog extends React.Component {
 

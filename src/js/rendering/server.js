@@ -3,7 +3,7 @@ import path from 'path';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Catalog from './../components/Catalog';
+import Catalog from '../components/catalog/Catalog';
 
 const app = express();
 
