@@ -12,6 +12,7 @@ export default class Category extends React.Component {
             id: props.id,
             products: []
         }
+        console.log(this.state.id)
     }
 
     componentDidMount() {

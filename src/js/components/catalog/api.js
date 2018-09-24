@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: `http://local.zephcontrol.com/modules/blocklayered/`
+    baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`
 });
 
 api.getProducts = (categoryId) => {
-    return api.get('blocklayered-ajax.php?id_category_layered=' + categoryId)
+    return api.get('?id_category_layered=' + categoryId)
         .then(json => json.data.productList.map(product => ({
             id: product.id_product,
             name: product.name
