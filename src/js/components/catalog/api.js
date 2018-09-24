@@ -1,8 +1,10 @@
 import http from 'axios'
+import { cacheAdapterEnhancer } from 'axios-extensions';
 
 const api = http.create({
-    //baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`
-    baseURL: `/api`
+    baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`,
+    //baseURL: `/api`,
+	adapter: cacheAdapterEnhancer(http.defaults.adapter)
 });
 
 api.getProducts = (categoryId) => {
