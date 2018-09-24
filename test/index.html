@@ -12,6 +12,65 @@
 
     <script type="text/javascript" src="/app.js"></script>
 
+    <style>
+        * {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ul li {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        .header {
+            padding: 0.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        /* Category */
+        .category {
+            display: flex;
+            padding: 1rem 0;
+        }
+
+        .category__content {
+            flex: 1;
+        }
+
+        .category__filterbar {
+            padding-right: 3rem;
+        }
+
+        /* Products */
+        .products {
+            padding: 0 1rem;
+        }
+
+        .products__item {
+            float: left;
+            width: 33.3333%;
+            padding: 1rem;
+        }
+
+        /* Product */
+        .product {
+            height: 20rem;
+            background-color: rgb(242, 242,242);
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
+
 </body>
 
 </html>

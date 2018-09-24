@@ -29,20 +29,14 @@ export default class Category extends React.Component {
         return (
             <div className="category">
 
-                <h2>Category {this.state.id}</h2>
-
-                <nav className="filters">
-                    <ul>
-                        <li><span className="filter">Best Kiteboarding</span></li>
-                        <li><span className="filter">Kite</span></li>
+                <div className="category__content">
+                    <ul className="products">
+                        {this.state.products.map(product => <li className="products__item" key={product.id}><Product data={product} /></li>)}
                     </ul>
-                </nav>
+                </div>
 
-                <ul className="products">
-                    {this.state.products.map(product => <li key={product.id}><Product data={product} /></li>)}
-                </ul>
-
-                <aside className="filterbar">
+                <aside className="category__filterbar">
+                    <h2>Category {this.state.id}</h2>
                     <ul className="filters">
                         {this.state.filters.map(filter => <li key={filter.type}><Filter data={filter} /></li>)}
                     </ul>

@@ -17,11 +17,15 @@ export default class Catalog extends React.PureComponent {
             <Router>
                 <div className="catalog">
 
-                    <h1>{this.state.title}</h1>
+                    <header className="header">
+                        <h1>{this.state.title}</h1>
+                    </header>
 
-                    <Route
-                        path='/:category'
-                        component={({ match }) => <Category id={match.url.match(/^\/(\d+)-/)[1]} />} />
+                    <main className="content">
+                        <Route
+                            path='/:category'
+                            component={({ match }) => <Category id={match.url.match(/^\/(\d+)-/)[1]} />} />
+                    </main>
 
                 </div>
             </Router>
