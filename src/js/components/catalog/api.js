@@ -4,7 +4,7 @@ import { cacheAdapterEnhancer } from 'axios-extensions';
 const api = http.create({
     baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`,
     //baseURL: `/api`,
-	adapter: cacheAdapterEnhancer(http.defaults.adapter)
+    adapter: cacheAdapterEnhancer(http.defaults.adapter)
 });
 
 api.getProducts = (categoryId) => {
@@ -17,13 +17,30 @@ api.getProducts = (categoryId) => {
         .catch(error => alert(error));
 };
 
+api.findProducts = (categoryId, filters) => {
+
+    var params = { id_category_layered: categoryId };
+    filters.forEach(function (filter) {
+        filter.options.forEach(function (option) {
+            params['layered_' + filter.type + '_' + option.id] = option.id;
+        });
+    });
+
+    return api.get('blocklayered.json', { params: params })
+        .then(json => json.data.products.map(product => ({
+            id: product.id_product,
+            name: product.name
+        })))
+        .catch(error => alert(error));
+}
+
 api.getFilters = (categoryId) => {
 
     return api.get('blocklayered.json?id_category_layered=' + categoryId)
-        .then(function(json) {
+        .then(function (json) {
 
             var filters = [];
-            json.data.filter.filters.map(function(jsonFilter) {
+            json.data.filter.filters.map(function (jsonFilter) {
 
                 var filter = {
                     id: jsonFilter.id_key,
@@ -32,7 +49,7 @@ api.getFilters = (categoryId) => {
                     options: []
                 };
 
-                Object.keys(jsonFilter.values).forEach(function(optionId) {
+                Object.keys(jsonFilter.values).forEach(function (optionId) {
                     filter.options.push({
                         id: optionId,
                         name: jsonFilter.values[optionId].name
@@ -41,8 +58,7 @@ api.getFilters = (categoryId) => {
 
                 filters.push(filter);
             });
-            
-            console.log(filters)
+
             return filters;
         })
         .catch(error => alert(error));
