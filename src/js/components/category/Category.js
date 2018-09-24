@@ -2,6 +2,7 @@ import React from 'react';
 import API from '../catalog/api';
 import { withRouter } from 'react-router'
 
+import Filter from '../filter/Filter';
 import Product from '../product/Product';
 
 export default class Category extends React.Component {
@@ -10,7 +11,8 @@ export default class Category extends React.Component {
         super(props);
         this.state = {
             id: props.id,
-            products: []
+            products: [],
+            filters: []
         }
     }
 
@@ -19,7 +21,8 @@ export default class Category extends React.Component {
         API.getProducts(this.state.id)
             .then(products => this.setState({ products: products }));
 
-        
+        API.getFilters(this.state.id)
+            .then(filters => this.setState({ filters: filters }));
     }
 
     render() {
@@ -40,6 +43,9 @@ export default class Category extends React.Component {
                 </ul>
 
                 <aside className="filterbar">
+                    <ul className="filters">
+                        {this.state.filters.map(filter => <li key={filter.type}><Filter data={filter} /></li>)}
+                    </ul>
                 </aside>
 
             </div>
