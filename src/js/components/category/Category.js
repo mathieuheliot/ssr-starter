@@ -12,7 +12,8 @@ export default class Category extends React.Component {
         this.state = {
             id: props.id,
             products: [],
-            filters: []
+            filters: [],
+            selectedOptions: []
         }
     }
 
@@ -26,7 +27,8 @@ export default class Category extends React.Component {
     }
 
     onFilter(filter) {
-        API.findProducts(this.state.id, this.state.filters)
+        this.state.selectedOptions.push(filter);
+        API.findProducts(this.state.id, this.state.selectedOptions)
             .then(products => this.setState({ products: products }));
     }
 

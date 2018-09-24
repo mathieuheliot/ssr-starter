@@ -17,13 +17,17 @@ api.getProducts = (categoryId) => {
         .catch(error => alert(error));
 };
 
-api.findProducts = (categoryId, filters) => {
+api.findProducts = (categoryId, options) => {
 
     var params = { id_category_layered: categoryId };
-    filters.forEach(function (filter) {
+    /* filters.forEach(function (filter) {
         filter.options.forEach(function (option) {
             params['layered_' + filter.type + '_' + option.id] = option.id;
         });
+    }); */
+
+    options.forEach(function (option) {
+        params['layered_' + option.filterType + '_' + option.id] = option.id;
     });
 
     return api.get('blocklayered.json', { params: params })
@@ -52,7 +56,8 @@ api.getFilters = (categoryId) => {
                 Object.keys(jsonFilter.values).forEach(function (optionId) {
                     filter.options.push({
                         id: optionId,
-                        name: jsonFilter.values[optionId].name
+                        filterType: jsonFilter.type,
+                        label: jsonFilter.values[optionId].name
                     });
                 });
 
