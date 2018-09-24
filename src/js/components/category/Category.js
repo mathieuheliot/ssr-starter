@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../catalog/api';
+import { withRouter } from 'react-router'
 
 import Product from '../product/Product';
-;
 
 export default class Category extends React.Component {
 
@@ -12,12 +12,14 @@ export default class Category extends React.Component {
             id: props.id,
             products: []
         }
-        console.log(this.state.id)
     }
 
     componentDidMount() {
+
         API.getProducts(this.state.id)
             .then(products => this.setState({ products: products }));
+
+        
     }
 
     render() {

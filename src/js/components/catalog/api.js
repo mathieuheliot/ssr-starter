@@ -1,6 +1,6 @@
-import axios from 'axios';
+import http from 'axios';
 
-const api = axios.create({
+const api = http.create({
     baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`
 });
 
