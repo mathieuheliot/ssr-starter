@@ -13,7 +13,7 @@ export default class Category extends React.Component {
             id: props.id,
             products: [],
             filters: [],
-            selectedOptions: new Map()
+            selectedOptions: []
         }
     }
 
@@ -26,16 +26,36 @@ export default class Category extends React.Component {
             .then(filters => this.setState({ filters: filters }));
     }
 
-    onFilter(filter) {
+    addFilter(filterOption) {
+        var options = [];
+        options = this.state.selectedOptions;
+        options.push(filterOption);
+        this.setState({ selectedOptions: options });
+        this.refresh();
+    }
 
-        var filterId = filter.filterType + filter.id;
-        if ( !filter.checked ) {
-            this.state.selectedOptions.set(filterId, filter);
+    removeFilter(filterOption) {
+        var options = [];
+        this.state.selectedOptions.forEach(option => {
+            if (filterOption.id !== option.id && filterOption.filterType !== option.filterType) {
+                options.push(option);
+            }
+        });
+        this.setState({ selectedOptions: options });
+        this.refresh();
+    }
+
+    onFilter(filterOption) {
+
+        if (!filterOption.checked) {
+            this.addFilter(filterOption);
         }
         else {
-            this.state.selectedOptions.delete(filterId, filter);
+            this.removeFilter(filterOption);
         }
-        
+    }
+
+    refresh() {
         API.findProducts(this.state.id, this.state.selectedOptions)
             .then(products => this.setState({ products: products }));
     }
@@ -52,13 +72,25 @@ export default class Category extends React.Component {
 
                 <aside className="category__filterbar">
                     <h2>Category {this.state.id}</h2>
-                    <ul className="filters">
-                        {this.state.filters.map(filter => (
-                            <li className="filers__item" key={filter.type}>
-                                <Filter data={filter} onChange={(filter) => this.onFilter(filter)} />
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="filter">
+                        <ul className="options">
+                            {this.state.selectedOptions.map(option => (
+                                <li className="options__item" key={option.id}>
+                                    <span className="option">
+                                        {option.label}
+                                        <a className="option__close-btn" href="#" title="Retirer ce filtre" onClick={() => this.removeFilter(option)}>X</a>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        <ul className="filters">
+                            {this.state.filters.map(filter => (
+                                <li className="filers__item" key={filter.type}>
+                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </aside>
 
             </div>
