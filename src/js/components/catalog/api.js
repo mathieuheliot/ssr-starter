@@ -20,12 +20,6 @@ api.getProducts = (categoryId) => {
 api.findProducts = (categoryId, options) => {
 
     var params = { id_category_layered: categoryId };
-    /* filters.forEach(function (filter) {
-        filter.options.forEach(function (option) {
-            params['layered_' + filter.type + '_' + option.id] = option.id;
-        });
-    }); */
-
     options.forEach(function (option) {
         params['layered_' + option.filterType + '_' + option.id] = option.id;
     });

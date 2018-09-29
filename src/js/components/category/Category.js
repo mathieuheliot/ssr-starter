@@ -13,7 +13,7 @@ export default class Category extends React.Component {
             id: props.id,
             products: [],
             filters: [],
-            selectedOptions: []
+            selectedOptions: new Map()
         }
     }
 
@@ -27,7 +27,15 @@ export default class Category extends React.Component {
     }
 
     onFilter(filter) {
-        this.state.selectedOptions.push(filter);
+
+        var filterId = filter.filterType + filter.id;
+        if ( !filter.checked ) {
+            this.state.selectedOptions.set(filterId, filter);
+        }
+        else {
+            this.state.selectedOptions.delete(filterId, filter);
+        }
+        
         API.findProducts(this.state.id, this.state.selectedOptions)
             .then(products => this.setState({ products: products }));
     }
