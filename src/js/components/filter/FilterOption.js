@@ -12,9 +12,13 @@ class FilterOption extends React.Component {
         }, props.data);
     }
 
-    onToggle() {
+    toggle() {
         this.setState({ checked: !this.state.checked });
-        this.props.onChange(this.state);
+        this.props.onChange(this);
+    }
+
+    onToggle() {
+        this.toggle();
     }
 
     render() {
@@ -23,6 +27,7 @@ class FilterOption extends React.Component {
                 <input type="checkbox"
                     name={this.state.filterType}
                     value={this.state.id}
+                    checked={this.state.checked}
                     onChange={() => this.onToggle()} />{this.state.label}</label>
         )
     }

@@ -14,8 +14,8 @@ class Filter extends React.Component {
         }, props.data);
     }
 
-    onToggle(option) {
-        this.props.onChange(option);
+    onToggle(filterOption) {
+        this.props.onChange(filterOption);
     }
 
     render() {
@@ -25,7 +25,7 @@ class Filter extends React.Component {
                 <ul className="filter__options">
                     {this.state.options.map(option => (
                         <li className="filter__options__item" key={option.id}>
-                            <FilterOption data={option} onChange={(option) => this.onToggle(option)} />
+                            <FilterOption data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
                         </li>
                     ))}
                 </ul>

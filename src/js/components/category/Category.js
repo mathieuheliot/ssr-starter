@@ -26,37 +26,33 @@ export default class Category extends React.Component {
             .then(filters => this.setState({ filters: filters }));
     }
 
-    addFilter(filterOption) {
-        var options = [];
-        options = this.state.selectedOptions;
-        options.push(filterOption);
-        this.setState({ selectedOptions: options });
-        this.refresh();
-    }
-
     removeFilter(filterOption) {
-        var options = [];
-        this.state.selectedOptions.forEach(option => {
-            if (filterOption.id !== option.id && filterOption.filterType !== option.filterType) {
-                options.push(option);
-            }
-        });
-        this.setState({ selectedOptions: options });
-        this.refresh();
+        var instance = this.refs[filterOption.filterType].refs[filterOption.id];
+        if (instance === undefined) {
+            throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterType + ' and id ' + filterOption.id);
+        }
+        instance.toggle();
     }
 
     onFilter(filterOption) {
 
-        if (!filterOption.checked) {
-            this.addFilter(filterOption);
+        var options = [];
+        if (!filterOption.state.checked) {
+            options = this.state.selectedOptions;
+            options.push(filterOption.state);
         }
         else {
-            this.removeFilter(filterOption);
+            this.state.selectedOptions.forEach(option => {
+                
+                if (filterOption.state.filterType !== option.filterType
+                    || (filterOption.state.filterType === option.filterType && filterOption.state.id !== option.id)) {
+                    options.push(option);
+                }
+            });
         }
-    }
 
-    refresh() {
-        API.findProducts(this.state.id, this.state.selectedOptions)
+        this.setState({ selectedOptions: options });
+        API.findProducts(this.state.id, options)
             .then(products => this.setState({ products: products }));
     }
 
@@ -73,6 +69,7 @@ export default class Category extends React.Component {
                 <aside className="category__filterbar">
                     <h2>Category {this.state.id}</h2>
                     <div className="filter">
+                        <strong>{this.state.selectedOptions.length} filtre(s) sélectionné(s)</strong>
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
                                 <li className="options__item" key={option.id}>
@@ -86,7 +83,7 @@ export default class Category extends React.Component {
                         <ul className="filters">
                             {this.state.filters.map(filter => (
                                 <li className="filers__item" key={filter.type}>
-                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} />
+                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
                                 </li>
                             ))}
                         </ul>
