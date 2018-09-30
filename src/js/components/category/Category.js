@@ -43,7 +43,7 @@ export default class Category extends React.Component {
         }
         else {
             this.state.selectedOptions.forEach(option => {
-                
+
                 if (filterOption.state.filterType !== option.filterType
                     || (filterOption.state.filterType === option.filterType && filterOption.state.id !== option.id)) {
                     options.push(option);
@@ -69,7 +69,9 @@ export default class Category extends React.Component {
                 <aside className="category__filterbar">
                     <h2>Category {this.state.id}</h2>
                     <div className="filter">
-                        <strong>{this.state.selectedOptions.length} filtre(s) sélectionné(s)</strong>
+                        {this.state.selectedOptions.length > 0 &&
+                            <strong>{this.state.selectedOptions.length} filtre{this.state.selectedOptions.length > 1 ? 's' : ''} sélectionné{this.state.selectedOptions.length > 1 ? 's' : ''}</strong>
+                        }
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
                                 <li className="options__item" key={option.id}>
