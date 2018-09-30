@@ -1,16 +1,18 @@
 import React from 'react';
-import API from '../catalog/api';
+import QueryString from 'query-string';
 import { withRouter } from 'react-router'
 
+import API from '../catalog/api';
 import Filter from '../filter/Filter';
 import Product from '../product/Product';
 
-export default class Category extends React.Component {
+class Category extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             id: props.id,
+            page: QueryString.parse(props.location.search).p,
             products: [],
             filters: [],
             selectedOptions: []
@@ -19,7 +21,7 @@ export default class Category extends React.Component {
 
     componentDidMount() {
 
-        API.getProducts(this.state.id)
+        API.getProducts(this.state.id, this.state.page)
             .then(products => this.setState({ products: products }));
 
         API.getFilters(this.state.id)
@@ -52,7 +54,7 @@ export default class Category extends React.Component {
         }
 
         this.setState({ selectedOptions: options });
-        API.findProducts(this.state.id, options)
+        API.getProducts(this.state.id, this.state.page, options)
             .then(products => this.setState({ products: products }));
     }
 
@@ -64,6 +66,11 @@ export default class Category extends React.Component {
                     <ul className="products">
                         {this.state.products.map(product => <li className="products__item" key={product.id}><Product data={product} /></li>)}
                     </ul>
+                    <nav className="pagination">
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </nav>
                 </div>
 
                 <aside className="category__filterbar">
@@ -96,3 +103,5 @@ export default class Category extends React.Component {
         );
     }
 }
+
+export default withRouter(Category)

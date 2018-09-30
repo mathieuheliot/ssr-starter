@@ -1,3 +1,5 @@
+
+import _ from 'lodash/lang';
 import http from 'axios'
 import { cacheAdapterEnhancer } from 'axios-extensions';
 
@@ -7,22 +9,19 @@ const api = http.create({
     adapter: cacheAdapterEnhancer(http.defaults.adapter)
 });
 
-api.getProducts = (categoryId) => {
-
-    return api.get('blocklayered.json?id_category_layered=' + categoryId)
-        .then(json => json.data.products.map(product => ({
-            id: product.id_product,
-            name: product.name
-        })))
-        .catch(error => alert(error));
-};
-
-api.findProducts = (categoryId, options) => {
+api.getProducts = (categoryId, pageNb, options) => {
 
     var params = { id_category_layered: categoryId };
-    options.forEach(function (option) {
-        params['layered_' + option.filterType + '_' + option.id] = option.id;
-    });
+
+    if (!_.isUndefined(pageNb)) {
+        params['p'] = pageNb;
+    }
+
+    if (!_.isUndefined(options)) {
+        options.forEach(function (option) {
+            params['layered_' + option.filterType + '_' + option.id] = option.id;
+        });
+    }
 
     return api.get('blocklayered.json', { params: params })
         .then(json => json.data.products.map(product => ({
@@ -30,7 +29,7 @@ api.findProducts = (categoryId, options) => {
             name: product.name
         })))
         .catch(error => alert(error));
-}
+};
 
 api.getFilters = (categoryId) => {
 
