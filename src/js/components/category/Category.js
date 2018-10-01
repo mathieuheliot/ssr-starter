@@ -1,6 +1,6 @@
 import React from 'react';
 import QueryString from 'query-string';
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
 
 import API from '../catalog/api';
 import Filter from '../filter/Filter';
@@ -11,21 +11,27 @@ class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: props.id,
+            id: props.url.match(/^\/(\d+)-/)[1],
+            url: props.url,
             page: QueryString.parse(props.location.search).p,
             products: [],
             filters: [],
-            selectedOptions: []
+            selectedOptions: [],
+            totalPages: null,
+            totalProducts: null,
         }
     }
 
     componentDidMount() {
 
-        API.getProducts(this.state.id, this.state.page)
-            .then(products => this.setState({ products: products }));
+        this.refresh();
 
         API.getFilters(this.state.id)
             .then(filters => this.setState({ filters: filters }));
+    }
+
+    goTo(page) {
+        this.setState({ page: page }, () => this.refresh());
     }
 
     removeFilter(filterOption) {
@@ -34,6 +40,20 @@ class Category extends React.Component {
             throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterType + ' and id ' + filterOption.id);
         }
         instance.toggle();
+    }
+
+    refresh() {
+
+        this.props.history.push({
+            search: '?p=' + this.state.page
+        });
+
+        return API.getCategory(this.state.id, this.state.page, this.state.selectedOptions)
+            .then(category => this.setState({
+                products: category.products,
+                totalPages: category.totalPages,
+                totalProducts: category.totalProducts
+            }));
     }
 
     onFilter(filterOption) {
@@ -53,12 +73,40 @@ class Category extends React.Component {
             });
         }
 
-        this.setState({ selectedOptions: options });
-        API.getProducts(this.state.id, this.state.page, options)
-            .then(products => this.setState({ products: products }));
+        this.setState({
+            page: 1,
+            selectedOptions: options
+        },
+            () => this.refresh()
+        );
+    }
+
+    onPaginate(e, page) {
+        e.preventDefault();
+        this.goTo(page);
+    }
+
+    onRemoveFilter(e, filterOption) {
+        e.preventDefault();
+        this.removeFilter(filterOption);
     }
 
     render() {
+
+        let pagination = [];
+        for (let p = 1; p <= this.state.totalPages; p++) {
+
+            let style = 'pages__item';
+            if ( p == this.state.page ) {
+                style += ' active';
+            }
+
+            pagination.push(
+                <li className={style} key={"p" + p}>
+                    <a href={this.state.url + "?p=" + p} onClick={(e) => this.onPaginate(e, p)}>{p}</a>
+                </li>)
+        }
+
         return (
             <div className="category">
 
@@ -67,10 +115,10 @@ class Category extends React.Component {
                         {this.state.products.map(product => <li className="products__item" key={product.id}><Product data={product} /></li>)}
                     </ul>
                     <nav className="pagination">
-                        <ul>
-                            <li></li>
+                        <ul className="pages">
+                            {pagination}
                         </ul>
-                    </nav>
+                    </nav>                    
                 </div>
 
                 <aside className="category__filterbar">
@@ -84,7 +132,7 @@ class Category extends React.Component {
                                 <li className="options__item" key={option.id}>
                                     <span className="option">
                                         {option.label}
-                                        <a className="option__close-btn" href="#" title="Retirer ce filtre" onClick={() => this.removeFilter(option)}>X</a>
+                                        <a className="option__close-btn" href="#" title="Retirer ce filtre" onClick={(e) => this.onRemoveFilter(e, option)}>X</a>
                                     </span>
                                 </li>
                             ))}

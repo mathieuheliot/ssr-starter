@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Category from '../category/Category';
 
@@ -24,7 +25,8 @@ export default class Catalog extends React.PureComponent {
                     <main className="content">
                         <Route
                             path='/:category'
-                            component={({ match }) => <Category id={match.url.match(/^\/(\d+)-/)[1]} />} />
+                            component={({ match }) => <Category url={match.url} />}
+                            exact />
                     </main>
 
                 </div>

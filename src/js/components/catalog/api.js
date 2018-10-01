@@ -5,14 +5,13 @@ import { cacheAdapterEnhancer } from 'axios-extensions';
 
 const api = http.create({
     baseURL: `http://local.zephcontrol.com/modules/blocklayered/blocklayered-ajax.php`,
-    //baseURL: `/api`,
     adapter: cacheAdapterEnhancer(http.defaults.adapter)
 });
 
-api.getProducts = (categoryId, pageNb, options) => {
+api.getCategory = (categoryId, pageNb, options) => {
 
     var params = { id_category_layered: categoryId };
-
+    
     if (!_.isUndefined(pageNb)) {
         params['p'] = pageNb;
     }
@@ -24,10 +23,19 @@ api.getProducts = (categoryId, pageNb, options) => {
     }
 
     return api.get('blocklayered.json', { params: params })
-        .then(json => json.data.products.map(product => ({
-            id: product.id_product,
-            name: product.name
-        })))
+        .then(function(json) {
+
+            const products = json.data.products.map(product => ({
+                id: product.id_product,
+                name: product.name
+            }));
+
+            return {
+                products: products,
+                totalPages: json.data.totalPages,
+                totalProducts: json.data.totalProducts
+            };
+        })
         .catch(error => alert(error));
 };
 
@@ -60,7 +68,6 @@ api.getFilters = (categoryId) => {
             return filters;
         })
         .catch(error => alert(error));
-
 };
 
 export default api;
