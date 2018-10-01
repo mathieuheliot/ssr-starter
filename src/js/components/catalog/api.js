@@ -27,7 +27,8 @@ api.getCategory = (categoryId, pageNb, options) => {
 
             const products = json.data.products.map(product => ({
                 id: product.id_product,
-                name: product.name
+                name: product.name,
+                thumbnail: product.image
             }));
 
             return {
