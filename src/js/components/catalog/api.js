@@ -10,8 +10,8 @@ const api = http.create({
 
 api.getCategory = (categoryId, pageNb, options) => {
 
-    var params = { id_category_layered: categoryId };
-    
+    let params = { id_category_layered: categoryId };
+
     if (!_.isUndefined(pageNb)) {
         params['p'] = pageNb;
     }
@@ -23,7 +23,7 @@ api.getCategory = (categoryId, pageNb, options) => {
     }
 
     return api.get('blocklayered.json', { params: params })
-        .then(function(json) {
+        .then(function (json) {
 
             const products = json.data.products.map(product => ({
                 id: product.id_product,
@@ -45,16 +45,52 @@ api.getFilters = (categoryId) => {
     return api.get('blocklayered.json?id_category_layered=' + categoryId)
         .then(function (json) {
 
-            var filters = [];
+            let filters = [];
             json.data.filter.filters.map(function (jsonFilter) {
 
-                var filter = {
+                let filter = {
                     id: jsonFilter.id_key,
                     type: jsonFilter.type,
                     name: jsonFilter.name,
-                    options: []
+                    options: [],
+                    display: null
                 };
 
+                // Display type
+                let display = null;
+
+                if (!_.isUndefined(jsonFilter.slider && jsonFilter.slider)) {
+                    display = {
+                        input: 'range',
+                        min: jsonFilter.min,
+                        max: jsonFilter.max
+                    }
+                }
+                else if (jsonFilter.is_color_group && jsonFilter.is_color_group) {
+                    display = {
+                        input: 'color'
+                    }
+                }
+                else if (jsonFilter.filter_type === '1') {
+                    display = {
+                        input: 'radio'
+                    }
+                }
+                else if (jsonFilter.filter_type === '2') {
+                    display = {
+                        input: 'select'
+                    }
+                }
+                else {
+                    display = {
+                        input: 'checkbox'
+                    }
+                }
+
+                console.log(display);
+                filter.display = display;
+
+                // Options
                 Object.keys(jsonFilter.values).forEach(function (optionId) {
                     filter.options.push({
                         id: optionId,
