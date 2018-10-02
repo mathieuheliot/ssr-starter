@@ -97,7 +97,7 @@ class Category extends React.Component {
         for (let p = 1; p <= this.state.totalPages; p++) {
 
             let style = 'pages__item';
-            if ( p == this.state.page ) {
+            if (p == this.state.page) {
                 style += ' active';
             }
 
@@ -118,7 +118,7 @@ class Category extends React.Component {
                         <ul className="pages">
                             {pagination}
                         </ul>
-                    </nav>                    
+                    </nav>
                 </div>
 
                 <aside className="category__filterbar">
