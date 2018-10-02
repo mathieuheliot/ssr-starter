@@ -112,7 +112,7 @@ class Category extends React.Component {
 
                 <div className="category__content">
                     <ul className="products">
-                        {this.state.products.map(product => <li className="products__item" key={product.id}><Product data={product} /></li>)}
+                        {this.state.products.map(product => <li className="products__item" key={'product' + product.id}><Product data={product} /></li>)}
                     </ul>
                     <nav className="pagination">
                         <ul className="pages">
@@ -129,7 +129,7 @@ class Category extends React.Component {
                         }
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
-                                <li className="options__item" key={option.id}>
+                                <li className="options__item" key={'option' + option.id}>
                                     <span className="option">
                                         {option.label}
                                         <a className="option__close-btn" href="#" title="Retirer ce filtre" onClick={(e) => this.onRemoveFilter(e, option)}>X</a>
@@ -139,7 +139,7 @@ class Category extends React.Component {
                         </ul>
                         <ul className="filters">
                             {this.state.filters.map(filter => (
-                                <li className="filers__item" key={filter.type}>
+                                <li className="filers__item" key={'filter' + filter.id}>
                                     <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
                                 </li>
                             ))}

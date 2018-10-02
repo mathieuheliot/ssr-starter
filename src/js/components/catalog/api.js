@@ -49,7 +49,7 @@ api.getFilters = (categoryId) => {
             json.data.filter.filters.map(function (jsonFilter) {
 
                 let filter = {
-                    id: jsonFilter.id_key,
+                    id: (jsonFilter.type === 'id_attribute_group') ? jsonFilter.id_key : jsonFilter.type,
                     type: jsonFilter.type,
                     name: jsonFilter.name,
                     options: [],

@@ -24,7 +24,7 @@ class Filter extends React.Component {
                 <h3>{this.state.name}</h3>
                 <ul className="filter__options">
                     {this.state.options.map(option => (
-                        <li className="filter__options__item" key={option.id}>
+                        <li className="filter__options__item" key={'option' + option.id}>
                             <FilterOption data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
                         </li>
                     ))}
