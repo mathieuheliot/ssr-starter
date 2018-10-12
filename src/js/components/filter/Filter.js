@@ -24,20 +24,20 @@ class Filter extends React.Component {
         return (
             <ul className="filter">
                 <h3>{this.state.name}</h3>
-                <ul className="filter__options">
-                    {this.state.options.map(option => (
-                        <li className="filter__options__item" key={'option' + option.id}>
-                            {{
-                                'checkbox': (
+                {{
+                    'checkbox': (
+                        <ul className="filter__options">
+                            {this.state.options.map(option => (
+                                <li className="filter__options__item" key={'option' + option.id}>
                                     <OptionCheckbox data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
-                                ),
-                                'radio': (
-                                    <OptionRadio data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
-                                )
-                            }[this.state.display.input]}
-                        </li>
-                    ))}
-                </ul>
+                                </li>
+                            ))}
+                        </ul>
+                    ),
+                    'radio': (
+                        <OptionRadio data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
+                    )
+                }[this.state.display.input]}
             </ul>
         )
     }

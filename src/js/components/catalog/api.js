@@ -48,8 +48,9 @@ api.getFilters = (categoryId) => {
             let filters = [];
             json.data.filter.filters.map(function (jsonFilter) {
 
+                let filterId = (jsonFilter.type === 'id_attribute_group') ? 'id_attribute_group_' + jsonFilter.id_key : jsonFilter.type;
                 let filter = {
-                    id: (jsonFilter.type === 'id_attribute_group') ? jsonFilter.id_key : jsonFilter.type,
+                    id: filterId,
                     type: jsonFilter.type,
                     name: jsonFilter.name,
                     options: [],
@@ -93,6 +94,7 @@ api.getFilters = (categoryId) => {
                 Object.keys(jsonFilter.values).forEach(function (optionId) {
                     filter.options.push({
                         id: optionId,
+                        filterId: filterId,
                         filterType: jsonFilter.type,
                         label: jsonFilter.values[optionId].name
                     });

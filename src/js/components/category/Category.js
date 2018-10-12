@@ -35,9 +35,9 @@ class Category extends React.Component {
     }
 
     removeFilter(filterOption) {
-        var instance = this.refs[filterOption.filterType].refs[filterOption.id];
+        var instance = this.refs[filterOption.filterId].refs[filterOption.id];
         if (instance === undefined) {
-            throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterType + ' and id ' + filterOption.id);
+            throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterId + ' and id ' + filterOption.id);
         }
         instance.toggle();
     }
@@ -59,15 +59,15 @@ class Category extends React.Component {
     onFilter(filterOption) {
 
         var options = [];
-        if (!filterOption.state.checked) {
+        if (!filterOption.checked) {
             options = this.state.selectedOptions;
-            options.push(filterOption.state);
+            options.push(filterOption);
         }
         else {
             this.state.selectedOptions.forEach(option => {
 
-                if (filterOption.state.filterType !== option.filterType
-                    || (filterOption.state.filterType === option.filterType && filterOption.state.id !== option.id)) {
+                if (filterOption.filterId !== option.filterId
+                    || (filterOption.filterId === option.filterId && filterOption.id !== option.id)) {
                     options.push(option);
                 }
             });

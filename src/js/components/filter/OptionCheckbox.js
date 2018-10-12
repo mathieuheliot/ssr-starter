@@ -6,15 +6,15 @@ class OptionCheckbox extends React.Component {
         super(props);
         this.state = Object.assign({
             id: null,
+            filterId: null,
             checked: false,
-            filterType: null,
             label: null
         }, props.data);
     }
 
     toggle() {
         this.setState({ checked: !this.state.checked });
-        this.props.onChange(this);
+        this.props.onChange(this.state);
     }
 
     onToggle() {
@@ -25,7 +25,7 @@ class OptionCheckbox extends React.Component {
         return (
             <label className="option">
                 <input type="checkbox"
-                    name={this.state.filterType + '_' + this.state.id}
+                    name={this.state.filterId + '_' + this.state.id}
                     value={this.state.id}
                     checked={this.state.checked}
                     onChange={() => this.onToggle()} />{this.state.label}
