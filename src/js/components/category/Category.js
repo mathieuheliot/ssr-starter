@@ -140,7 +140,7 @@ class Category extends React.Component {
                         <ul className="filters">
                             {this.state.filters.map(filter => (
                                 <li className="filers__item" key={'filter' + filter.id}>
-                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
+                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.id} />
                                 </li>
                             ))}
                         </ul>
