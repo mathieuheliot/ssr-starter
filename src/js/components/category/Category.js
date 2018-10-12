@@ -35,7 +35,7 @@ class Category extends React.Component {
     }
 
     removeFilter(filterOption) {
-        var instance = this.refs[filterOption.filterId].refs[filterOption.id];
+        var instance = this.refs[filterOption.filterType].refs[filterOption.filterId].refs[filterOption.id];
         if (instance === undefined) {
             throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterId + ' and id ' + filterOption.id);
         }
@@ -140,7 +140,7 @@ class Category extends React.Component {
                         <ul className="filters">
                             {this.state.filters.map(filter => (
                                 <li className="filers__item" key={'filter' + filter.id}>
-                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.id} />
+                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
                                 </li>
                             ))}
                         </ul>

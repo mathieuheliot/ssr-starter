@@ -1,6 +1,8 @@
 import React from 'react';
 
-class OptionRadio extends React.Component {
+import RadioOption from './RadioOption';
+
+class RadioFilter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -11,20 +13,18 @@ class OptionRadio extends React.Component {
         };
     }
 
-    isChecked(option) {
-        if (this.state.selectedOption == null) {
-            return false;
+    toggle(option) {
+
+        if (this.state.selectedOption !== null) {
+            this.state.selectedOption.toggle();
         }
 
-        return (option.id === this.state.selectedOption.id)
-    }
-
-    toggle(option) {
         this.setState({
             checked: true,
             selectedOption: option
         });
-        this.props.onChange(option);
+
+        this.props.onChange(option.state);
     }
 
     onToggle(option) {
@@ -36,19 +36,12 @@ class OptionRadio extends React.Component {
             <ul className="filter__options filter__options--radio">
                 {this.state.options.map(option => (
                     <li className="filter__options__item" key={'option' + option.id}>
-                        <label className="option">
-                            <input type="radio"
-                                name={option.filterType}
-                                value={option.id}
-                                checked={this.isChecked(option)}
-                                onChange={() => this.onToggle(option)} />{option.label}
-                        </label>
+                        <RadioOption data={option} onChange={(radioOption) => this.onToggle(radioOption)} ref={option.id}/>
                     </li>
                 ))}
             </ul>
-
         )
     }
 }
 
-export default OptionRadio;
+export default RadioFilter;

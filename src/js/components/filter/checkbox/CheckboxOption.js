@@ -1,6 +1,6 @@
 import React from 'react';
 
-class OptionCheckbox extends React.Component {
+class CheckboxOption extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +14,7 @@ class OptionCheckbox extends React.Component {
 
     toggle() {
         this.setState({ checked: !this.state.checked });
-        this.props.onChange(this.state);
+        this.props.onChange(this);
     }
 
     onToggle() {
@@ -30,8 +30,9 @@ class OptionCheckbox extends React.Component {
                     checked={this.state.checked}
                     onChange={() => this.onToggle()} />{this.state.label}
             </label>
+
         )
     }
 }
 
-export default OptionCheckbox;
+export default CheckboxOption;
