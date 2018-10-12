@@ -1,6 +1,7 @@
 import React from 'react';
 
-import FilterOption from './FilterOption';
+import OptionCheckbox from './OptionCheckbox';
+import OptionRadio from './OptionRadio';
 
 class Filter extends React.Component {
 
@@ -10,7 +11,8 @@ class Filter extends React.Component {
             id: null,
             type: null,
             name: null,
-            options: []
+            options: [],
+            display: null
         }, props.data);
     }
 
@@ -25,7 +27,14 @@ class Filter extends React.Component {
                 <ul className="filter__options">
                     {this.state.options.map(option => (
                         <li className="filter__options__item" key={'option' + option.id}>
-                            <FilterOption data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
+                            {{
+                                'checkbox': (
+                                    <OptionCheckbox data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
+                                ),
+                                'radio': (
+                                    <OptionRadio data={option} onChange={(filterOption) => this.onToggle(filterOption)} ref={option.id} />
+                                )
+                            }[this.state.display.input]}
                         </li>
                     ))}
                 </ul>

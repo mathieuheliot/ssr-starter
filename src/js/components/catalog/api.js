@@ -87,7 +87,6 @@ api.getFilters = (categoryId) => {
                     }
                 }
 
-                console.log(display);
                 filter.display = display;
 
                 // Options

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FilterOption extends React.Component {
+class OptionRadio extends React.Component {
 
     constructor(props) {
         super(props);
@@ -24,13 +24,14 @@ class FilterOption extends React.Component {
     render() {
         return (
             <label className="option">
-                <input type="checkbox"
+                <input type="radio"
                     name={this.state.filterType}
                     value={this.state.id}
                     checked={this.state.checked}
-                    onChange={() => this.onToggle()} />{this.state.label}</label>
+                    onChange={() => this.onToggle()} />{this.state.label}
+            </label>
         )
     }
 }
 
-export default FilterOption;
+export default OptionRadio;
