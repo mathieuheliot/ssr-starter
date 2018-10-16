@@ -14,6 +14,13 @@ var webpackConfig = {
         filename: "app.js"
     },
 
+    resolve: {
+        extensions: [".js"],
+        alias: {
+            ["~"]: path.resolve(__dirname, "src/js/components")
+        }
+    },
+
     module: {
 
         rules: [

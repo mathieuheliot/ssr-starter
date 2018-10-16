@@ -3,7 +3,7 @@ import QueryString from 'query-string';
 import { withRouter } from 'react-router';
 
 import API from '../catalog/api';
-import Filter from '../filter/Filter';
+import FilterComponent from '../filter/FilterComponent';
 import Product from '../product/Product';
 
 class Category extends React.Component {
@@ -140,7 +140,7 @@ class Category extends React.Component {
                         <ul className="filters">
                             {this.state.filters.map(filter => (
                                 <li className="filers__item" key={'filter' + filter.id}>
-                                    <Filter data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
+                                    <FilterComponent data={filter} onChange={(filter) => this.onFilter(filter)} ref={filter.type} />
                                 </li>
                             ))}
                         </ul>

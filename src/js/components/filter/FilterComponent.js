@@ -3,7 +3,7 @@ import React from 'react';
 import CheckboxFilter from './checkbox/CheckboxFilter';
 import RadioFilter from './radio/RadioFilter';
 
-class Filter extends React.Component {
+class FilterComponent extends React.Component {
 
     constructor(props) {
         super(props);
@@ -30,6 +30,9 @@ class Filter extends React.Component {
                     ),
                     'radio': (
                         <RadioFilter data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
+                    ),
+                    'select': (
+                        <RadioFilter data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
                     )
                 }[this.state.display.input]}
             </ul>
@@ -37,4 +40,4 @@ class Filter extends React.Component {
     }
 }
 
-export default Filter;
+export default FilterComponent;

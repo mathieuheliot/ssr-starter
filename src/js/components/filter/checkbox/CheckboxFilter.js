@@ -1,22 +1,12 @@
 import React from 'react';
 
+import FilterSingle from '~/filter/FilterSingle';
 import CheckboxOption from './CheckboxOption';
 
-class CheckboxFilter extends React.Component {
+class CheckboxFilter extends FilterSingle {
 
     constructor(props) {
         super(props);
-        this.state = {
-            options: props.data
-        };
-    }
-
-    toggle(option) {
-        this.props.onChange(option.state);
-    }
-
-    onToggle(option) {
-        this.toggle(option);
     }
 
     render() {
