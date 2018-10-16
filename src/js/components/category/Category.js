@@ -88,7 +88,7 @@ class Category extends React.Component {
 
     onRemoveAllFilters(e) {
         e.preventDefault();
-        
+
         this.state.selectedOptions.forEach(filterOption => {
             this.removeFilter(filterOption);
         })
@@ -112,6 +112,7 @@ class Category extends React.Component {
             <div className="category">
 
                 <div className="category__content">
+                    <strong>{this.state.totalProducts} article{this.state.totalProducts > 1 ? 's' : ''}</strong>
                     <ul className="products">
                         {this.state.products.map(product => <li className="products__item" key={'product' + product.id}><Product data={product} /></li>)}
                     </ul>
