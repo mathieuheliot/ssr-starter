@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FilterMultiple from '~/filter/FilterMultiple';
+import FilterSingle from '~/filter/FilterSingle';
 import RadioOption from './RadioOption';
 
-class RadioFilter extends FilterMultiple {
+class RadioFilter extends FilterSingle {
 
     constructor(props) {
         super(props);

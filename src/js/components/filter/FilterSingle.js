@@ -5,16 +5,43 @@ class FilterSingle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: props.data
+            checked: false,
+            options: props.data,
+            selectedOption: null
         };
     }
 
-    toggle(option) {
-        this.props.onChange(option.state);
+    cancel(option) {
+        this.setState({
+            selectedOption: null
+        },
+            () => this.props.onChange(option.state)
+        );
     }
 
-    onToggle(option) {
-        this.toggle(option);
+    check(option) {
+
+        let action = () => {
+
+            this.setState({
+                selectedOption: option
+            },
+                () => this.props.onChange(option.state)
+            );
+        }
+
+        if (this.state.selectedOption !== null) {
+            this.state.selectedOption.uncheck(() => {
+                action();
+            });
+        }
+        else {
+            action();
+        }
+    }
+
+    uncheck(option) {        
+        this.props.onChange(option.state);
     }
 
     render() {
