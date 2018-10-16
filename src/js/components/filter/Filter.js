@@ -4,7 +4,7 @@ import CheckboxFilter from './checkbox/CheckboxFilter';
 import RadioFilter from './radio/RadioFilter';
 import SelectFilter from './select/SelectFilter';
 
-class FilterComponent extends React.Component {
+class Filter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -41,4 +41,4 @@ class FilterComponent extends React.Component {
     }
 }
 
-export default FilterComponent;
+export default Filter;

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FilterMultiple from '~/filter/FilterMultiple';
+import MultipleFilter from '~/filter/MultipleFilter';
 import CheckboxOption from './CheckboxOption';
 
-class CheckboxFilter extends FilterMultiple {
+class CheckboxFilter extends MultipleFilter {
 
     constructor(props) {
         super(props);

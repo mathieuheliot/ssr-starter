@@ -1,29 +1,11 @@
 import React from 'react';
 
-class CheckboxOption extends React.Component {
+import MultipleOption from '~/filter/MultipleOption';
+
+class CheckboxOption extends MultipleOption {
 
     constructor(props) {
         super(props);
-        this.state = Object.assign({
-            id: null,
-            filterId: null,
-            checked: false,
-            label: null
-        }, props.data);
-    }
-
-    cancel() {
-        this.toggle();
-    }
-
-    toggle() {
-        this.setState({ checked: !this.state.checked },
-            () => this.props.onChange(this)
-        );
-    }
-
-    onToggle() {
-        this.toggle();
     }
 
     render() {

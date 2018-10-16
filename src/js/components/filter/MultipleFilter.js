@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FilterMultiple extends React.Component {
+class MultipleFilter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,4 +22,4 @@ class FilterMultiple extends React.Component {
     }
 }
 
-export default FilterMultiple;
+export default MultipleFilter;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class FilterSingle extends React.Component {
+class SingleFilter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -49,4 +49,4 @@ class FilterSingle extends React.Component {
     }
 }
 
-export default FilterSingle;
+export default SingleFilter;

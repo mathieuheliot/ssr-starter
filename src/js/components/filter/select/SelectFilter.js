@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FilterSingle from '~/filter/FilterSingle';
+import SingleFilter from '~/filter/SingleFilter';
 import SelectOption from './SelectOption';
 
-class SelectFilter extends FilterSingle {
+class SelectFilter extends SingleFilter {
 
     constructor(props) {
         super(props);
