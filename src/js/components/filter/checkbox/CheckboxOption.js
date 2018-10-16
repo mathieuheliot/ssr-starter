@@ -12,9 +12,14 @@ class CheckboxOption extends React.Component {
         }, props.data);
     }
 
+    cancel() {
+        this.toggle();
+    }
+
     toggle() {
-        this.setState({ checked: !this.state.checked });
-        this.props.onChange(this);
+        this.setState({ checked: !this.state.checked },
+            () => this.props.onChange(this)
+        );
     }
 
     onToggle() {

@@ -39,7 +39,7 @@ class Category extends React.Component {
         if (instance === undefined) {
             throw new Error('Cannot recover instance of FilterOption with type ' + filterOption.filterId + ' and id ' + filterOption.id);
         }
-        instance.toggle();
+        instance.cancel();
     }
 
     refresh() {
@@ -59,7 +59,7 @@ class Category extends React.Component {
     onFilter(filterOption) {
 
         var options = [];
-        if (!filterOption.checked) {
+        if (filterOption.checked) {
             options = this.state.selectedOptions;
             options.push(filterOption);
         }

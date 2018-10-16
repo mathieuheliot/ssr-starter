@@ -13,22 +13,37 @@ class RadioFilter extends React.Component {
         };
     }
 
-    toggle(option) {
-
-        if (this.state.selectedOption !== null) {
-            this.state.selectedOption.toggle();
-        }
-
+    cancel(option) {
         this.setState({
-            checked: true,
-            selectedOption: option
-        });
-
-        this.props.onChange(option.state);
+            selectedOption: null
+        },
+            () => this.props.onChange(option.state)
+        );
     }
 
-    onToggle(option) {
-        this.toggle(option);
+    check(option) {
+
+        let action = () => {
+
+            this.setState({
+                selectedOption: option
+            },
+                () => this.props.onChange(option.state)
+            );
+        }
+
+        if (this.state.selectedOption !== null) {
+            this.state.selectedOption.uncheck(() => {
+                action();
+            });
+        }
+        else {
+            action();
+        }
+    }
+
+    uncheck(option) {        
+        this.props.onChange(option.state);
     }
 
     render() {
@@ -36,7 +51,12 @@ class RadioFilter extends React.Component {
             <ul className="filter__options filter__options--radio">
                 {this.state.options.map(option => (
                     <li className="filter__options__item" key={'option' + option.id}>
-                        <RadioOption data={option} onChange={(radioOption) => this.onToggle(radioOption)} ref={option.id}/>
+                        <RadioOption
+                            data={option}
+                            onCancel={(radioOption) => this.cancel(radioOption)}
+                            onCheck={(radioOption) => this.check(radioOption)}
+                            onUncheck={(radioOption) => this.uncheck(radioOption)}
+                            ref={option.id} />
                     </li>
                 ))}
             </ul>

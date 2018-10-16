@@ -1,3 +1,4 @@
+import _ from 'lodash/lang';
 import React from 'react';
 
 class RadioOption extends React.Component {
@@ -12,9 +13,50 @@ class RadioOption extends React.Component {
         }, props.data);
     }
 
+    cancel() {
+
+        this.setState({ checked: false },
+            () => {
+                this.props.onCancel(this)
+            }
+        );
+    }
+
+    check() {
+
+        if (this.state.checked) {
+            return;
+        }
+
+        this.setState({ checked: true },
+            () => this.props.onCheck(this)
+        );
+    }
+
+    uncheck(callback) {
+
+        if (!this.state.checked) {
+            return;
+        }
+        
+        this.setState({ checked: false },
+            () => {
+                if (!_.isUndefined(callback)) {
+                    callback(this);
+                }
+                this.props.onUncheck(this)
+            }
+        );
+    }
+
     toggle() {
-        this.setState({ checked: !this.state.checked });
-        this.props.onChange(this);
+
+        if (!this.state.checked) {
+            this.check();
+        }
+        else {
+            this.uncheck();
+        }
     }
 
     onToggle() {
