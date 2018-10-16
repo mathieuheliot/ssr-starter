@@ -2,6 +2,7 @@ import React from 'react';
 
 import CheckboxFilter from './checkbox/CheckboxFilter';
 import RadioFilter from './radio/RadioFilter';
+import SelectFilter from './select/SelectFilter';
 
 class FilterComponent extends React.Component {
 
@@ -32,7 +33,7 @@ class FilterComponent extends React.Component {
                         <RadioFilter data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
                     ),
                     'select': (
-                        <RadioFilter data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
+                        <SelectFilter data={this.state.options} onChange={(filterOption) => this.onToggle(filterOption)} ref={this.state.id} />
                     )
                 }[this.state.display.input]}
             </ul>
