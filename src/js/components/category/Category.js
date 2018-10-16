@@ -86,26 +86,27 @@ class Category extends React.Component {
         this.goTo(page);
     }
 
+    onRemoveAllFilters(e) {
+        e.preventDefault();
+        
+        this.state.selectedOptions.forEach(filterOption => {
+            this.removeFilter(filterOption);
+        })
+
+        this.setState({
+            page: 1,
+            selectedOptions: []
+        },
+            () => this.refresh()
+        );
+    }
+
     onRemoveFilter(e, filterOption) {
         e.preventDefault();
         this.removeFilter(filterOption);
     }
 
     render() {
-
-        let pagination = [];
-        for (let p = 1; p <= this.state.totalPages; p++) {
-
-            let style = 'pages__item';
-            if (p == this.state.page) {
-                style += ' active';
-            }
-
-            pagination.push(
-                <li className={style} key={"p" + p}>
-                    <a href={this.state.url + "?p=" + p} onClick={(e) => this.onPaginate(e, p)}>{p}</a>
-                </li>)
-        }
 
         return (
             <div className="category">
@@ -116,7 +117,7 @@ class Category extends React.Component {
                     </ul>
                     <nav className="pagination">
                         <ul className="pages">
-                            {pagination}
+                            {this.renderPagination()}
                         </ul>
                     </nav>
                 </div>
@@ -125,8 +126,11 @@ class Category extends React.Component {
                     <h2>Category {this.state.id}</h2>
                     <div className="filter">
                         {this.state.selectedOptions.length > 0 &&
-                            <strong>{this.state.selectedOptions.length} filtre{this.state.selectedOptions.length > 1 ? 's' : ''} sélectionné{this.state.selectedOptions.length > 1 ? 's' : ''}</strong>
-                        }
+                            <div className="filter__header">
+                                <strong>{this.state.selectedOptions.length} filtre{this.state.selectedOptions.length > 1 ? 's' : ''} sélectionné{this.state.selectedOptions.length > 1 ? 's' : ''}</strong>
+                                <a className="option__close-btn" href="#" title="Effacer tous les filtres" onClick={(e) => this.onRemoveAllFilters(e)}>Effacer</a>
+                            </div>
+                        }                        
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
                                 <li className="options__item" key={'option' + option.id}>
@@ -149,6 +153,25 @@ class Category extends React.Component {
 
             </div>
         );
+    }
+
+    renderPagination() {
+
+        let pagination = [];
+        for (let p = 1; p <= this.state.totalPages; p++) {
+
+            let style = 'pages__item';
+            if (p == this.state.page) {
+                style += ' active';
+            }
+
+            pagination.push(
+                <li className={style} key={"p" + p}>
+                    <a href={this.state.url + "?p=" + p} onClick={(e) => this.onPaginate(e, p)}>{p}</a>
+                </li>)
+        }
+
+        return (pagination)
     }
 }
 
