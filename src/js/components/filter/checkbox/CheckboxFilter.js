@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MultipleFilter from '~/filter/MultipleFilter';
+import MultipleFilter from './../MultipleFilter';
 import CheckboxOption from './CheckboxOption';
 
 class CheckboxFilter extends MultipleFilter {

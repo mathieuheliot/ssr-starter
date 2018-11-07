@@ -1,6 +1,6 @@
 import React from 'react';
 
-import MultipleOption from '~/filter/MultipleOption';
+import MultipleOption from './../MultipleOption';
 
 class CheckboxOption extends MultipleOption {
 

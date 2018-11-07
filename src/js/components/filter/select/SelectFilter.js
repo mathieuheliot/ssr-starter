@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SingleFilter from '~/filter/SingleFilter';
+import SingleFilter from './../SingleFilter';
 import SelectOption from './SelectOption';
 
 class SelectFilter extends SingleFilter {

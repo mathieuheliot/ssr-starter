@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SingleFilter from '~/filter/SingleFilter';
+import SingleFilter from './../SingleFilter';
 import RadioOption from './RadioOption';
 
 class RadioFilter extends SingleFilter {
