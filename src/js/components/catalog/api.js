@@ -37,7 +37,7 @@ api.getCategory = (categoryId, pageNb, options) => {
                 totalProducts: json.data.totalProducts
             };
         })
-        .catch(error => alert(error));
+        .catch(error => console.error(error));
 };
 
 api.getFilters = (categoryId) => {
@@ -105,7 +105,7 @@ api.getFilters = (categoryId) => {
 
             return filters;
         })
-        .catch(error => alert(error));
+        .catch(error => console.error(error));
 };
 
 export default api;

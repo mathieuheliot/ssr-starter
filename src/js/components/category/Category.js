@@ -11,18 +11,18 @@ class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: props.url.match(/^\/(\d+)-/)[1],
-            url: props.url,
+            id: props.match.url.match(/^\/(\d+)-/)[1],
+            url: props.match.url,
             page: QueryString.parse(props.location.search).p,
-            products: [],
-            filters: [],
+            products: props.products || [],
+            filters: props.filters || [],
             selectedOptions: [],
             totalPages: null,
             totalProducts: null,
         }
     }
-
-    componentDidMount() {
+    
+    componentDidMount() {        
 
         this.refresh();
 

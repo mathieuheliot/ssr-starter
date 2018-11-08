@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import Category from '../category/Category';
 
@@ -15,22 +14,20 @@ export default class Catalog extends React.PureComponent {
 
     render() {
         return (
-            <Router>
-                <div className="catalog">
+            <div className="catalog">
 
-                    <header className="header">
-                        <h1>{this.state.title}</h1>
-                    </header>
+                <header className="header">
+                    <h1>{this.state.title}</h1>
+                </header>
 
-                    <main className="content">
-                        <Route
-                            path='/:category'
-                            component={({ match }) => <Category url={match.url} />}
-                            exact />
-                    </main>
+                <main className="content">
+                    <Route
+                        path='/:category'
+                        component={() => <Category products={this.props.products} filters={this.props.filters} />}
+                        exact />
+                </main>
 
-                </div>
-            </Router>
+            </div>
         );
     }
 }

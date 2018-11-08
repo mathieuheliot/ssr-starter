@@ -27,7 +27,9 @@ Production running process
 - https://medium.com/@andreasmcd/how-my-team-converted-our-website-from-jquery-to-react-in-small-steps-cd4390f0a146
 - https://medium.com/@to_pe/how-to-add-react-to-a-simple-html-file-a11511c0235f
 - http://blog.theodo.fr/2018/04/react-server-side-rendering/
-- 
+
+### SSR Axios:
+- https://medium.com/@phoebe.greig/headache-free-isomorphic-app-tutorial-react-js-react-router-node-js-ssr-with-state-and-es6-797a8d8e493a
 
 ### Nginx configuration:
 - https://github.com/gorangajic/isbot
