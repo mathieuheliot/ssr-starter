@@ -2,7 +2,7 @@ import React from 'react';
 import QueryString from 'query-string';
 import { withRouter } from 'react-router';
 
-import API from '../catalog/api';
+import prestashop from '../../api/prestashop.js';
 import Filter from '../filter/Filter';
 import Product from '../product/Product';
 
@@ -11,11 +11,11 @@ class Category extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: props.url.match(/^\/(\d+)-/)[1],
-            url: props.url,
+            id: props.match.url.match(/^\/(\d+)-/)[1],
+            url: props.match.url,
             page: QueryString.parse(props.location.search).p,
-            products: [],
-            filters: [],
+            products: props.products || [],
+            filters: props.filters || [],
             selectedOptions: [],
             totalPages: null,
             totalProducts: null,
@@ -26,7 +26,7 @@ class Category extends React.Component {
 
         this.refresh();
 
-        API.getFilters(this.state.id)
+        prestashop.getFilters(this.state.id)
             .then(filters => this.setState({ filters: filters }));
     }
 
@@ -48,7 +48,7 @@ class Category extends React.Component {
             search: '?p=' + this.state.page
         });
 
-        return API.getCategory(this.state.id, this.state.page, this.state.selectedOptions)
+        return prestashop.getCategory(this.state.id, this.state.page, this.state.selectedOptions)
             .then(category => this.setState({
                 products: category.products,
                 totalPages: category.totalPages,
@@ -108,11 +108,11 @@ class Category extends React.Component {
 
     render() {
 
-        return (
+        return (  
             <div className="category">
 
                 <div className="category__content">
-                    <strong>{ (this.state.products.length > 0) ? this.state.totalProducts : 0 } article{this.state.totalProducts > 1 ? 's' : ''}</strong>
+                    <strong>{(this.state.products.length > 0) ? this.state.totalProducts : 0} article{this.state.totalProducts > 1 ? 's' : ''}</strong>
                     <ul className="products">
                         {this.state.products.map(product => <li className="products__item" key={'product' + product.id}><Product data={product} /></li>)}
                     </ul>
@@ -131,7 +131,7 @@ class Category extends React.Component {
                                 <strong>{this.state.selectedOptions.length} filtre{this.state.selectedOptions.length > 1 ? 's' : ''} sélectionné{this.state.selectedOptions.length > 1 ? 's' : ''}</strong>
                                 <a className="option__close-btn" href="#" title="Effacer tous les filtres" onClick={(e) => this.onRemoveAllFilters(e)}>Effacer</a>
                             </div>
-                        }                        
+                        }
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
                                 <li className="options__item" key={'option' + option.id}>

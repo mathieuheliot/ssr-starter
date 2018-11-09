@@ -11,9 +11,8 @@ Proof of concept and boilerplate of Server Side Rendering of ReactJS application
 Development commands.
 Execute `npm run [TASK]`, where TASK can be one of the following values:
 - `build`: Compile an application version ready to deploy in the /dist folder
-- `dev`: Launch an hot reload process
-- `start`: Launch a JS rendering server at http://localhost:3000
-- `test`: Serve JS content for browser rendering at http://localhost:3001
+- `serve`: Serve content with server side rendering at http://localhost:3000
+- `start`: Launch environnement an hot reload process at http://localhost:3001
 
 ### Docker
 Production running process
@@ -27,7 +26,9 @@ Production running process
 - https://medium.com/@andreasmcd/how-my-team-converted-our-website-from-jquery-to-react-in-small-steps-cd4390f0a146
 - https://medium.com/@to_pe/how-to-add-react-to-a-simple-html-file-a11511c0235f
 - http://blog.theodo.fr/2018/04/react-server-side-rendering/
-- 
+
+### SSR Axios:
+- https://medium.com/@phoebe.greig/headache-free-isomorphic-app-tutorial-react-js-react-router-node-js-ssr-with-state-and-es6-797a8d8e493a
 
 ### Nginx configuration:
 - https://github.com/gorangajic/isbot
@@ -37,3 +38,4 @@ Production running process
 ### Docker configuration:
 - https://github.com/mattrayner/docker-lamp
 - https://github.com/naga3/docker-lamp
+- https://www.cloudreach.com/blog/containerize-this-php-apache-mysql-within-docker-containers/

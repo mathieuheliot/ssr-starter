@@ -25,10 +25,15 @@ class JSServer {
         $output = curl_exec($curl);
 
         // Check for errors
+        if ( !$output ) {
+            error_log("Remote JavaScript server {JS_SERVER_URL}:{JS_SERVER_URL} is unreacheable");
+            $output = 'error';
+        }
+
         if ($errno = curl_errno($curl)) {
             $errorMsg = curl_strerror($errno);
-            error_log("Request to remote JavaScrpt server {$_SERVER_URL}:{$_SERVER_PORT} failed({$errno}):\n {$errorMsg}");
-            return '';
+            error_log("Request to remote JavaScript server {JS_SERVER_URL}:{JS_SERVER_URL} failed({$errno}):\n {$errorMsg}");
+            $output = 'error';
         }
 
         curl_close($curl);
