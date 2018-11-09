@@ -48,7 +48,7 @@ function html(reactDom) {
 }
 
 function htmlError() {
-    return = `<strong>Ooops, une erreur est survenue</strong>`
+    return `<strong>Ooops, une erreur est survenue</strong>`
 }
 
 function htmlTemplate(reactDom) {
