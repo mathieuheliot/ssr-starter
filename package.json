@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack --mode production --progress",
     "dev": "webpack --mode development --watch",
-    "start": "webpack --mode development && node ./src/js/index.js",
+    "start": "node ./src/js/index.js",
     "test": "webpack-dev-server --mode development"
   },
   "dependencies": {

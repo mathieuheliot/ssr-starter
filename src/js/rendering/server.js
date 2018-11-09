@@ -7,7 +7,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from "react-router-dom"
 
-import API from '../components/catalog/api';
+import prestashop from '../api/prestashop';
 import Catalog from '../components/catalog/Catalog';
 
 const PORT = 3000
@@ -19,8 +19,8 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 app.get('/*', (req, res) => {
 
     http.all([
-        API.getCategory(22),
-        API.getFilters(22)
+        prestashop.getCategory(22),
+        prestashop.getFilters(22)
     ])
         .then(http.spread((category, filters) => {
 

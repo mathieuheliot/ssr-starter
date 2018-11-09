@@ -2,7 +2,7 @@ import React from 'react';
 import QueryString from 'query-string';
 import { withRouter } from 'react-router';
 
-import API from '../catalog/api';
+import prestashop from '../../api/prestashop.js';
 import Filter from '../filter/Filter';
 import Product from '../product/Product';
 
@@ -26,7 +26,7 @@ class Category extends React.Component {
 
         this.refresh();
 
-        API.getFilters(this.state.id)
+        prestashop.getFilters(this.state.id)
             .then(filters => this.setState({ filters: filters }));
     }
 
@@ -48,7 +48,7 @@ class Category extends React.Component {
             search: '?p=' + this.state.page
         });
 
-        return API.getCategory(this.state.id, this.state.page, this.state.selectedOptions)
+        return prestashop.getCategory(this.state.id, this.state.page, this.state.selectedOptions)
             .then(category => this.setState({
                 products: category.products,
                 totalPages: category.totalPages,
