@@ -1,4 +1,3 @@
 FROM node:8
-MAINTAINER Mathieu Héliot
 
 EXPOSE 3000

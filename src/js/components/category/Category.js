@@ -21,8 +21,8 @@ class Category extends React.Component {
             totalProducts: null,
         }
     }
-    
-    componentDidMount() {        
+
+    componentDidMount() {
 
         this.refresh();
 
@@ -108,11 +108,11 @@ class Category extends React.Component {
 
     render() {
 
-        return (
+        return (  
             <div className="category">
 
                 <div className="category__content">
-                    <strong>{ (this.state.products.length > 0) ? this.state.totalProducts : 0 } article{this.state.totalProducts > 1 ? 's' : ''}</strong>
+                    <strong>{(this.state.products.length > 0) ? this.state.totalProducts : 0} article{this.state.totalProducts > 1 ? 's' : ''}</strong>
                     <ul className="products">
                         {this.state.products.map(product => <li className="products__item" key={'product' + product.id}><Product data={product} /></li>)}
                     </ul>
@@ -131,7 +131,7 @@ class Category extends React.Component {
                                 <strong>{this.state.selectedOptions.length} filtre{this.state.selectedOptions.length > 1 ? 's' : ''} sélectionné{this.state.selectedOptions.length > 1 ? 's' : ''}</strong>
                                 <a className="option__close-btn" href="#" title="Effacer tous les filtres" onClick={(e) => this.onRemoveAllFilters(e)}>Effacer</a>
                             </div>
-                        }                        
+                        }
                         <ul className="options">
                             {this.state.selectedOptions.map(option => (
                                 <li className="options__item" key={'option' + option.id}>

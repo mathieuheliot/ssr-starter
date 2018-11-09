@@ -13,7 +13,6 @@ import App from '../app/App';
 const PORT = 3000
 
 const app = express();
-
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', (req, res) => {
@@ -35,8 +34,8 @@ app.get('/*', (req, res) => {
         }))
         .catch(err => {
             console.error(err)
-            res.writeHead(500, { "Content-type": "text/html" });
-            res.end(htmlError);
+            res.writeHead(200, { "Content-type": "text/html" });
+            res.end(htmlError());
         })
 })
 
@@ -49,12 +48,15 @@ function html(reactDom) {
 }
 
 function htmlError() {
-    const jsx = (<h1>Ooops, une erreur est survenue</h1>)
-    return htmlTemplate(jsx)
+    return = `<strong>Ooops, une erreur est survenue</strong>`
 }
 
 function htmlTemplate(reactDom) {
-    return `
+
+    return `<div id="app">${reactDom}</div>`
+
+    // Only local context for test
+    /* return `
         <!DOCTYPE html>
         <html>
         <head>
@@ -68,5 +70,5 @@ function htmlTemplate(reactDom) {
             <script async type="text/javascript" src="http://localhost:3001/app.js"></script>
         </body>
         </html>
-    `
+    `*/
 }

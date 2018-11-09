@@ -13,12 +13,13 @@ class App extends React.PureComponent {
 
         return (
             <div className="app">
+                <h2 className="app__title">Catalogue</h2>
                 <Switch>
 
                     <Route
                         path='/:category'
                         component={() => <Category products={this.props.products} filters={this.props.filters} />}
-                        exact />   
+                        exact />
 
                 </Switch>
             </div>
