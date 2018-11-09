@@ -8,7 +8,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from "react-router-dom"
 
 import prestashop from '../api/prestashop';
-import Catalog from '../components/catalog/Catalog';
+import App from '../app/App';
 
 const PORT = 3000
 
