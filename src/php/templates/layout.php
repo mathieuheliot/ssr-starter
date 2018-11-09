@@ -17,7 +17,7 @@
             <p>Server Side Renderering with PHP and JS</p>
             <p>Proof of concept and boilerplate of Server Side Rendering of ReactJS application inside templates files from PHP.</p>
 
-            <div class="app app-js">
+            <div class="app app--js">
                 <div id="app"><?php JSServer::render(); ?></div>
             </div>
         </main>
@@ -27,6 +27,17 @@
         </footer>
 
     </div>
+
+    <style>
+
+        .app {}
+
+        .app.app--js {
+            padding: 0.5rem;
+            background-color: lightgray;
+        }
+
+    </style>
 
     <script type="text/javascript" src="/dist/app.js"></script>
     
