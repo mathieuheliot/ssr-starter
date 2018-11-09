@@ -4,9 +4,8 @@
   "description": "POC of Server Side Rendering of ReactJS inside templates from PHP",
   "scripts": {
     "build": "webpack --mode production --progress",
-    "dev": "webpack --mode development --watch",
-    "start": "node ./src/js/index.js",
-    "test": "webpack-dev-server --mode development"
+    "serve": "node ./src/js/server/index.js",
+    "start": "webpack-dev-server --mode development"
   },
   "dependencies": {
     "axios": "^0.18.0",

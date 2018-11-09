@@ -6,7 +6,7 @@ const ACTION = process.env.npm_lifecycle_event;
 var webpackConfig = {
 
     entry: {
-        client: './src/js/rendering/client.js'
+        client: './src/js/index.js'
     },
 
     output: {
@@ -33,7 +33,7 @@ var webpackConfig = {
     }
 }
 
-if (ACTION === 'test') {
+if (ACTION === 'start') {
 
     webpackConfig = merge(webpackConfig, {
 

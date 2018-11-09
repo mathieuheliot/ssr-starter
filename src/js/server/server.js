@@ -26,7 +26,7 @@ app.get('/*', (req, res) => {
 
             const jsx = (
                 <Router location={req.url} context={{}}>
-                    <Catalog products={category.products} filters={filters} />
+                    <App products={category.products} filters={filters} />
                 </Router>);
 
             const reactDom = renderToString(jsx);
